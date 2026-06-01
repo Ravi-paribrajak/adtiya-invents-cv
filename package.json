@@ -1,0 +1,12 @@
+{
+  "name": "my-cv",
+  "version": "1.0.0",
+  "description": "Developer Portfolio Template built with Tailwind CSS v4",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y http-server -c-1 -p 8000"
+  },
+  "keywords": [],
+  "author": "Ravi Shankar Kumar Paribrajak",
+  "license": "ISC"
+}

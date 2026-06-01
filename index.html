@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aditya Paribrajak | Portfolio</title>
+  <meta name="description" content="Premium, high-performance portfolio template with electric slate and neon teal styling.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS v4 Play CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  
+  <style type="text/tailwindcss">
+    @theme {
+      --color-brand-neon: #00f2fe;
+      --color-brand-electric: #3b82f6;
+      --color-bg-dark: var(--bg-dark);
+      --color-bg-card: var(--bg-card);
+      --color-bg-card-hover: var(--bg-card-hover);
+      --color-text-primary: var(--text-primary);
+      --color-text-secondary: var(--text-secondary);
+      --color-border-main: var(--border-main);
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    /* Custom CSS Variables mapping to handle light/dark theme seamlessly */
+    :root {
+      --bg-dark: #070a13;
+      --bg-card: #0f1424;
+      --bg-card-hover: #171d33;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --border-main: #1e293b;
+      color-scheme: dark;
+    }
+
+    html.light {
+      --bg-dark: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --border-main: #e2e8f0;
+      color-scheme: light;
+    }
+
+    /* Base Scrollbar Styling */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-brand-electric) var(--color-bg-dark);
+    }
+    
+    @supports not (scrollbar-color: auto) {
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--color-bg-dark);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--color-border-main);
+        border-radius: 9999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-brand-electric);
+      }
+    }
+
+    /* Shimmer keyframes and utilities */
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .animate-gradient-shift {
+      background-size: 200% 200%;
+      animation: gradient-shift 6s ease infinite;
+    }
+
+    .glow-blob {
+      filter: blur(140px);
+      pointer-events: none;
+    }
+
+    .project-card {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+  </style>
+
+  <!-- Anti-FOUC script -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      } else {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      }
+    })();
+  </script>
+</head>
+<body class="bg-bg-dark text-text-primary font-sans transition-colors duration-300 antialiased selection:bg-brand-neon selection:text-slate-950 min-h-screen relative overflow-x-hidden">
+
+  <!-- Ambient Glow Blobs -->
+  <div class="absolute top-[10%] -left-[10%] w-[500px] h-[500px] rounded-full bg-brand-neon/10 glow-blob z-0"></div>
+  <div class="absolute top-[40%] -right-[10%] w-[450px] h-[450px] rounded-full bg-brand-electric/8 glow-blob z-0"></div>
+  <div class="absolute top-[75%] left-[20%] w-[400px] h-[400px] rounded-full bg-brand-neon/8 glow-blob z-0"></div>
+
+  <!-- Header / Navigation -->
+  <header id="navbar" class="sticky top-0 z-50 w-full border-b border-border-main/50 bg-bg-dark/70 backdrop-blur-md transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#hero" class="flex items-center gap-2 group">
+        <img src="assets/logo.jpg" alt="Aditya Paribrajak Logo" class="w-8 h-8 object-contain group-hover:scale-105 transition-transform duration-300">
+        <span class="text-xl font-bold tracking-wider text-text-primary uppercase">ADITYA<span class="text-brand-neon">.</span></span>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-text-secondary">
+        <a href="#hero" class="hover:text-brand-neon transition-colors duration-200">Home</a>
+        <a href="#education" class="hover:text-brand-neon transition-colors duration-200">Education</a>
+        <a href="#skills" class="hover:text-brand-neon transition-colors duration-200">Skills</a>
+        <a href="#projects" class="hover:text-brand-neon transition-colors duration-200">Projects</a>
+        <a href="#contact" class="hover:text-brand-neon transition-colors duration-200">Contact</a>
+      </nav>
+
+      <!-- Desktop Action Items -->
+      <div class="hidden md:flex items-center space-x-4">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" aria-label="Toggle color theme" class="p-2.5 rounded-lg border border-border-main/60 bg-bg-card hover:bg-bg-card-hover text-text-secondary hover:text-brand-neon transition-all duration-200 cursor-pointer">
+          <!-- Dark Icon (Moon) -->
+          <svg id="theme-toggle-dark-icon" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <!-- Light Icon (Sun) -->
+          <svg id="theme-toggle-light-icon" class="w-4 h-4 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </button>
+        <!-- CTA -->
+        <a href="#contact" class="px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider border border-brand-neon/60 text-brand-neon hover:bg-brand-neon/10 transition-all duration-300">
+          Get In Touch
+        </a>
+      </div>
+
+      <!-- Mobile Controls (Hamburger & Theme Toggle) -->
+      <div class="flex items-center space-x-3 md:hidden">
+        <!-- Theme Toggle (Mobile) -->
+        <button id="theme-toggle-mobile" aria-label="Toggle color theme" class="p-2 rounded-lg border border-border-main/60 bg-bg-card text-text-secondary hover:text-brand-neon cursor-pointer">
+          <svg id="theme-toggle-dark-icon-mob" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <svg id="theme-toggle-light-icon-mob" class="w-4 h-4 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </button>
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" class="p-2 rounded-lg border border-border-main/60 bg-bg-card text-text-primary cursor-pointer" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+          <svg id="hamburger-icon" class="w-5 h-5 block" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="close-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-bg-dark/95 backdrop-blur-lg border-b border-border-main/60 transition-all duration-300 py-6 px-8 z-40">
+      <nav class="flex flex-col space-y-4 text-base font-semibold text-text-primary">
+        <a href="#hero" class="mobile-nav-link hover:text-brand-neon transition-colors duration-200">Home</a>
+        <a href="#education" class="mobile-nav-link hover:text-brand-neon transition-colors duration-200">Education</a>
+        <a href="#skills" class="mobile-nav-link hover:text-brand-neon transition-colors duration-200">Skills</a>
+        <a href="#projects" class="mobile-nav-link hover:text-brand-neon transition-colors duration-200">Projects</a>
+        <a href="#contact" class="mobile-nav-link hover:text-brand-neon transition-colors duration-200">Contact</a>
+        <div class="h-[1px] bg-border-main/60 my-2"></div>
+        <a href="#contact" class="mobile-nav-link inline-block text-center w-full py-2.5 rounded-lg bg-gradient-to-r from-brand-neon to-brand-electric text-slate-950 font-bold uppercase tracking-wider text-xs">
+          Get In Touch
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative min-h-[calc(100vh-80px)] flex items-center max-w-7xl mx-auto px-6 py-16 lg:py-24 z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+      <!-- Hero Content (Left) -->
+      <div class="lg:col-span-7 flex flex-col items-start text-left">
+        <!-- Status Indicator -->
+        <span class="inline-flex items-center gap-2 px-3 py-1 bg-brand-neon/10 border border-brand-neon/20 text-brand-neon text-xs font-mono tracking-widest rounded-full uppercase mb-6">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-neon animate-ping"></span>
+          Active Engineering Deployment
+        </span>
+
+        <!-- Headline -->
+        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-text-primary leading-[1.1] mb-6">
+          Aditya <br class="hidden sm:inline">
+          <span class="bg-gradient-to-r from-brand-neon via-brand-electric to-brand-neon bg-[length:200%_auto] animate-gradient-shift bg-clip-text text-transparent">Paribrajak</span>.
+        </h1>
+
+        <!-- Subhead -->
+        <p class="text-lg lg:text-xl font-medium text-text-secondary mb-3 max-w-2xl leading-relaxed font-mono uppercase text-brand-neon text-sm tracking-wider">
+          Full-Stack Developer & Robotics Content Architect
+        </p>
+        <p class="text-base text-text-secondary mb-8 max-w-xl leading-relaxed">
+          Bridging the gap between robust software engineering and interactive hardware deployment.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <!-- Primary CTA Button -->
+          <a href="#projects" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-semibold rounded-xl group bg-gradient-to-br from-brand-neon to-brand-electric hover:shadow-[0_0_20px_rgba(0,242,254,0.3)] transition-all duration-300 text-text-primary">
+            <span class="relative px-8 py-4 transition-all ease-in duration-75 bg-bg-dark group-hover:bg-opacity-0 rounded-[10px] w-full sm:w-auto flex items-center justify-center gap-2 group-hover:text-slate-950">
+              View Showcase
+              <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </span>
+          </a>
+          <!-- Secondary Resume Button -->
+          <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold text-text-primary border border-border-main bg-bg-card/30 backdrop-blur-sm rounded-xl hover:border-brand-neon/60 hover:bg-bg-card-hover hover:-translate-y-0.5 transition-all duration-200">
+            Get In Touch
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Visual / Terminal Widget (Right) -->
+      <div class="lg:col-span-5 hidden lg:block">
+        <div class="w-full bg-bg-card/85 border border-border-main/70 rounded-2xl p-6 shadow-2xl backdrop-blur-md relative overflow-hidden group hover:border-brand-neon/40 hover:shadow-[0_0_30px_rgba(0,242,254,0.1)] transition-all duration-500">
+          <!-- Top bar -->
+          <div class="flex items-center justify-between mb-5 border-b border-border-main pb-3">
+            <div class="flex space-x-2">
+              <span class="w-3.5 h-3.5 rounded-full bg-red-500/80"></span>
+              <span class="w-3.5 h-3.5 rounded-full bg-yellow-500/80"></span>
+              <span class="w-3.5 h-3.5 rounded-full bg-green-500/80"></span>
+            </div>
+            <span class="text-xs font-mono text-text-secondary">aether_session.sh</span>
+          </div>
+          <!-- Terminal Content -->
+          <div class="font-mono text-xs space-y-4 text-text-secondary">
+            <p class="text-brand-electric">$ <span class="text-text-primary">npm init dev-portfolio</span></p>
+            <p class="text-slate-500">✓ Loading layout framework...</p>
+            <p class="text-slate-500">✓ Injecting neon slate/teal design system...</p>
+            <p class="text-slate-500">✓ Loading responsive containers...</p>
+            <p class="text-brand-neon">$ <span class="text-text-primary">node --run start</span></p>
+            
+            <!-- Dynamic Telemetry Block -->
+            <div class="p-4 bg-bg-dark/85 rounded-xl border border-border-main/60 text-brand-neon/90">
+              <div class="flex justify-between items-center mb-2">
+                <span class="font-semibold text-text-primary">Aether Live Console</span>
+                <span class="text-[10px] bg-brand-neon/20 px-2 py-0.5 rounded-full text-brand-neon font-bold uppercase tracking-wider">online</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-[10px] mt-2 font-mono text-slate-400">
+                <div>FPS: <span class="text-text-primary">60.0</span></div>
+                <div>CPU: <span class="text-text-primary">12.4%</span></div>
+                <div>Latency: <span class="text-brand-neon">14ms</span></div>
+                <div>Memory: <span class="text-text-primary">82MB</span></div>
+              </div>
+            </div>
+            <p class="text-[10px] text-slate-600 animate-pulse">// Listening for scroll triggers...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education" class="max-w-7xl mx-auto px-6 py-24 border-t border-border-main/40 relative z-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+      <div class="text-left">
+        <h2 class="text-xs font-mono tracking-widest text-brand-neon uppercase mb-3">// Academic History</h2>
+        <p class="text-3xl lg:text-4xl font-extrabold text-text-primary tracking-tight">Education Timeline</p>
+      </div>
+      <p class="text-text-secondary text-sm md:max-w-sm mt-4 md:mt-0 leading-relaxed">
+        Acquiring theoretical frameworks and computing fundamentals to implement high-reliability web and embedded software architectures.
+      </p>
+    </div>
+
+    <!-- Timeline Wrapper -->
+    <div class="max-w-3xl ml-4 relative border-l border-border-main/80 space-y-12 pb-4">
+      
+      <!-- Timeline Item 1 -->
+      <div class="relative pl-8 group">
+        <!-- Node Marker -->
+        <div class="absolute -left-[9px] top-1.5 w-4.5 h-4.5 rounded-full bg-brand-neon border-4 border-bg-dark shadow-[0_0_10px_rgba(0,242,254,0.5)] group-hover:scale-110 transition-transform duration-300"></div>
+        
+        <!-- Timeline Card -->
+        <div class="bg-bg-card border border-border-main/70 rounded-2xl p-6 sm:p-8 hover:border-brand-neon/40 hover:shadow-[0_0_20px_rgba(0,242,254,0.08)] transition-all duration-300">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+            <span class="px-3 py-1 text-xs font-semibold font-mono tracking-wider bg-brand-neon/10 border border-brand-neon/20 rounded-full text-brand-neon w-fit">
+              2024 - 2028
+            </span>
+            <span class="text-xs font-semibold text-text-secondary font-mono">India</span>
+          </div>
+          <h3 class="text-xl font-bold text-text-primary group-hover:text-brand-neon transition-colors duration-200">
+            Bachelor of Technology (B.Tech) in Computer Science Engineering
+          </h3>
+          <p class="text-sm font-semibold text-brand-electric font-mono mt-1 mb-4">3rd Year Undergraduate</p>
+          <p class="text-sm text-text-secondary leading-relaxed mb-4">
+            Comprehensive coursework in system architecture, algorithm design, digital electronics, database systems, and object-oriented modeling. Integrating software development processes with hardware microcontrollers.
+          </p>
+          <ul class="text-xs text-text-secondary list-disc pl-4 space-y-2">
+            <li>Specialized Focus: IoT Systems, Microcontroller Programming, Full-Stack Web Architecture</li>
+            <li>Research area: Real-time telemetry systems for embedded microcontrollers</li>
+          </ul>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Technical Skills Section -->
+  <section id="skills" class="max-w-7xl mx-auto px-6 py-24 border-t border-border-main/40 relative z-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+      <div class="text-left">
+        <h2 class="text-xs font-mono tracking-widest text-brand-neon uppercase mb-3">// Capability Grid</h2>
+        <p class="text-3xl lg:text-4xl font-extrabold text-text-primary tracking-tight">Technical Skills</p>
+      </div>
+      <p class="text-text-secondary text-sm md:max-w-sm mt-4 md:mt-0 leading-relaxed">
+        A structured breakdown of software development frameworks, hardware microcontrollers, and digital production suites representing my operational capabilities.
+      </p>
+    </div>
+
+    <!-- Skills Category Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <!-- Category: Software -->
+      <div class="bg-bg-card border border-border-main/70 rounded-2xl p-6 hover:border-brand-neon/30 transition-all duration-300 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-brand-neon/10 border border-brand-neon/20 flex items-center justify-center text-brand-neon">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary">Software</h3>
+          </div>
+          <!-- Skills list with meters -->
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1.5">
+                <span class="text-text-secondary">Next.js 14 / React</span>
+                <span class="text-brand-neon">92%</span>
+              </div>
+              <div class="h-1.5 w-full bg-bg-dark rounded-full overflow-hidden border border-border-main/40">
+                <div class="h-full bg-gradient-to-r from-brand-electric to-brand-neon rounded-full" style="width: 92%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1.5">
+                <span class="text-text-secondary">TypeScript</span>
+                <span class="text-brand-neon">90%</span>
+              </div>
+              <div class="h-1.5 w-full bg-bg-dark rounded-full overflow-hidden border border-border-main/40">
+                <div class="h-full bg-gradient-to-r from-brand-electric to-brand-neon rounded-full" style="width: 90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1.5">
+                <span class="text-text-secondary">Rust / Kotlin</span>
+                <span class="text-brand-neon">80%</span>
+              </div>
+              <div class="h-1.5 w-full bg-bg-dark rounded-full overflow-hidden border border-border-main/40">
+                <div class="h-full bg-gradient-to-r from-brand-electric to-brand-neon rounded-full" style="width: 80%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-1.5 mt-6 border-t border-border-main/40 pt-4">
+          <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark/80 rounded border border-border-main/60 text-slate-400">Tailwind CSS</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark/80 rounded border border-border-main/60 text-slate-400">Prisma</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark/80 rounded border border-border-main/60 text-slate-400">Supabase</span>
+        </div>
+      </div>
+
+      <!-- Category: Hardware & Electronics -->
+      <div class="bg-bg-card border border-border-main/70 rounded-2xl p-6 hover:border-brand-neon/30 transition-all duration-300 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-brand-electric/10 border border-brand-electric/20 flex items-center justify-center text-brand-electric">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary">Hardware</h3>
+          </div>
+          <!-- Skills list with meters -->
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1.5">
+                <span class="text-text-secondary">Microcontrollers</span>
+                <span class="text-brand-electric">90%</span>
+              </div>
+              <div class="h-1.5 w-full bg-bg-dark rounded-full overflow-hidden border border-border-main/40">
+                <div class="h-full bg-gradient-to-r from-brand-electric to-brand-neon rounded-full" style="width: 90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1.5">
+                <span class="text-text-secondary">Sensor Integration</span>
+                <span class="text-brand-electric">85%</span>
+              </div>
+              <div class="h-1.5 w-full bg-bg-dark rounded-full overflow-hidden border border-border-main/40">
+                <div class="h-full bg-gradient-to-r from-brand-electric to-brand-neon rounded-full" style="width: 85%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1.5">
+                <span class="text-text-secondary">Wireless & Drivers</span>
+                <span class="text-brand-electric">80%</span>
+              </div>
+              <div class="h-1.5 w-full bg-bg-dark rounded-full overflow-hidden border border-border-main/40">
+                <div class="h-full bg-gradient-to-r from-brand-electric to-brand-neon rounded-full" style="width: 80%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-1.5 mt-6 border-t border-border-main/40 pt-4">
+          <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark/80 rounded border border-border-main/60 text-slate-400">Arduino Uno/Mega</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark/80 rounded border border-border-main/60 text-slate-400">ESP32</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark/80 rounded border border-border-main/60 text-slate-400">NRF24L01 Modules</span>
+        </div>
+      </div>
+
+      <!-- Category: Media & Production -->
+      <div class="bg-bg-card border border-border-main/70 rounded-2xl p-6 hover:border-brand-neon/30 transition-all duration-300 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-brand-neon/10 border border-brand-neon/20 flex items-center justify-center text-brand-neon">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 12a2 2 0 012-2h10a2 2 0 012 2m-14 0a2 2 0 002 2h10a2 2 0 002-2M5 4h14a2 2 0 012 2v3a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2zm0 11h14a2 2 0 012 2v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a2 2 0 012-2z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary">Media Production</h3>
+          </div>
+          <!-- Skills list with meters -->
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1.5">
+                <span class="text-text-secondary">DaVinci Resolve</span>
+                <span class="text-brand-neon">88%</span>
+              </div>
+              <div class="h-1.5 w-full bg-bg-dark rounded-full overflow-hidden border border-border-main/40">
+                <div class="h-full bg-gradient-to-r from-brand-electric to-brand-neon rounded-full" style="width: 88%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1.5">
+                <span class="text-text-secondary">Audio Mastering</span>
+                <span class="text-brand-neon">85%</span>
+              </div>
+              <div class="h-1.5 w-full bg-bg-dark rounded-full overflow-hidden border border-border-main/40">
+                <div class="h-full bg-gradient-to-r from-brand-electric to-brand-neon rounded-full" style="width: 85%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1.5">
+                <span class="text-text-secondary">Content Strategy</span>
+                <span class="text-brand-neon">82%</span>
+              </div>
+              <div class="h-1.5 w-full bg-bg-dark rounded-full overflow-hidden border border-border-main/40">
+                <div class="h-full bg-gradient-to-r from-brand-electric to-brand-neon rounded-full" style="width: 82%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-1.5 mt-6 border-t border-border-main/40 pt-4">
+          <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark/80 rounded border border-border-main/60 text-slate-400">Resolve Fusion</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark/80 rounded border border-border-main/60 text-slate-400">Auphonic Mastering</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark/80 rounded border border-border-main/60 text-slate-400">Digital Strategy</span>
+        </div>
+      </div>
+
+      <!-- Category: Integration & Protocols -->
+      <div class="bg-bg-card border border-border-main/70 rounded-2xl p-6 hover:border-brand-neon/30 transition-all duration-300 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-brand-electric/10 border border-brand-electric/20 flex items-center justify-center text-brand-electric">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary">DevOps & Systems</h3>
+          </div>
+          <!-- Skills list with meters -->
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1.5">
+                <span class="text-text-secondary">Git / GitHub</span>
+                <span class="text-brand-electric">92%</span>
+              </div>
+              <div class="h-1.5 w-full bg-bg-dark rounded-full overflow-hidden border border-border-main/40">
+                <div class="h-full bg-gradient-to-r from-brand-electric to-brand-neon rounded-full" style="width: 92%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1.5">
+                <span class="text-text-secondary">Protocols & Buses</span>
+                <span class="text-brand-electric">85%</span>
+              </div>
+              <div class="h-1.5 w-full bg-bg-dark rounded-full overflow-hidden border border-border-main/40">
+                <div class="h-full bg-gradient-to-r from-brand-electric to-brand-neon rounded-full" style="width: 85%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1.5">
+                <span class="text-text-secondary">Supabase integration</span>
+                <span class="text-brand-electric">88%</span>
+              </div>
+              <div class="h-1.5 w-full bg-bg-dark rounded-full overflow-hidden border border-border-main/40">
+                <div class="h-full bg-gradient-to-r from-brand-electric to-brand-neon rounded-full" style="width: 88%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-1.5 mt-6 border-t border-border-main/40 pt-4">
+          <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark/80 rounded border border-border-main/60 text-slate-400">SPI/I2C/UART</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark/80 rounded border border-border-main/60 text-slate-400">Hardware-in-the-Loop</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark/80 rounded border border-border-main/60 text-slate-400">Docker</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Projects Showcase Section -->
+  <section id="projects" class="max-w-7xl mx-auto px-6 py-24 border-t border-border-main/40 relative z-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <div class="text-left">
+        <h2 class="text-xs font-mono tracking-widest text-brand-neon uppercase mb-3">// Project Portfolio</h2>
+        <p class="text-3xl lg:text-4xl font-extrabold text-text-primary tracking-tight">Featured Projects</p>
+      </div>
+      <p class="text-text-secondary text-sm md:max-w-sm mt-4 md:mt-0 leading-relaxed">
+        An interactive filterable showcase demonstrating specialized full-stack applications and real-time dashboard systems.
+      </p>
+    </div>
+
+    <!-- Interactive Category Filter Tabs -->
+    <div class="flex flex-wrap gap-3 mb-10 pb-2 border-b border-border-main/30">
+      <button class="filter-tab px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg border border-border-main bg-bg-card text-text-primary hover:border-brand-neon/60 hover:text-brand-neon transition-all duration-200 cursor-pointer active" data-filter="all">
+        All Systems
+      </button>
+      <button class="filter-tab px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg border border-border-main bg-bg-card text-text-secondary hover:border-brand-neon/60 hover:text-brand-neon transition-all duration-200 cursor-pointer" data-filter="web">
+        Web Apps
+      </button>
+      <button class="filter-tab px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg border border-border-main bg-bg-card text-text-secondary hover:border-brand-neon/60 hover:text-brand-neon transition-all duration-200 cursor-pointer" data-filter="mobile">
+        Mobile
+      </button>
+      <button class="filter-tab px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg border border-border-main bg-bg-card text-text-secondary hover:border-brand-neon/60 hover:text-brand-neon transition-all duration-200 cursor-pointer" data-filter="ai">
+        AI & Systems
+      </button>
+    </div>
+
+    <!-- Project Cards Grid -->
+    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      
+      <!-- Project Card 1 (LocalDroid) -->
+      <div class="project-item bg-bg-card border border-border-main/70 rounded-2xl overflow-hidden group hover:border-brand-neon/50 hover:shadow-[0_0_30px_rgba(0,242,254,0.1)] transition-all duration-300 flex flex-col justify-between" data-category="mobile">
+        <div>
+          <!-- Project Image -->
+          <div class="relative aspect-video overflow-hidden border-b border-border-main/50">
+            <img src="assets/project_mobile_wallet.png" alt="LocalDroid Mobile File Transfer Platform" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-bg-card via-transparent to-transparent opacity-60"></div>
+          </div>
+          <!-- Project Info -->
+          <div class="p-6">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10px] font-semibold font-mono text-brand-neon bg-brand-neon/10 border border-brand-neon/20 px-2 py-0.5 rounded uppercase">Mobile & System Ecosystem</span>
+              <span class="text-xs font-mono text-text-secondary">Active</span>
+            </div>
+            <h3 class="text-xl font-bold text-text-primary mb-2 group-hover:text-brand-neon transition-colors duration-200">LocalDroid</h3>
+            <p class="text-sm text-text-secondary leading-relaxed mb-4">
+              A high-performance, WebRTC-based wireless file transfer ecosystem optimized for cross-platform data handling (Android & macOS) featuring a customized 16 KB data chunking pipeline for ultimate stability.
+            </p>
+          </div>
+        </div>
+        <div class="px-6 pb-6 pt-2">
+          <!-- Tech pills -->
+          <div class="flex flex-wrap gap-1.5 mb-6">
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">WebRTC</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">Kotlin</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">TypeScript</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">Systems</span>
+          </div>
+          <!-- Project links -->
+          <div class="flex gap-4">
+            <a href="https://github.com/Ravi-paribrajak" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-brand-neon hover:underline gap-1.5">
+              Source Code
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project Card 2 (Freelance Web Architecture & Production) -->
+      <div class="project-item bg-bg-card border border-border-main/70 rounded-2xl overflow-hidden group hover:border-brand-neon/50 hover:shadow-[0_0_30px_rgba(0,242,254,0.1)] transition-all duration-300 flex flex-col justify-between" data-category="web">
+        <div>
+          <!-- Project Image -->
+          <div class="relative aspect-video overflow-hidden border-b border-border-main/50">
+            <img src="assets/project_dashboard.png" alt="Client Web Architecture Mockup" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-bg-card via-transparent to-transparent opacity-60"></div>
+          </div>
+          <!-- Project Info -->
+          <div class="p-6">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10px] font-semibold font-mono text-brand-neon bg-brand-neon/10 border border-brand-neon/20 px-2 py-0.5 rounded uppercase">Full-Stack Deployments</span>
+              <span class="text-xs font-mono text-brand-neon font-bold tracking-wider">MARQUEE</span>
+            </div>
+            <h3 class="text-xl font-bold text-text-primary mb-2 group-hover:text-brand-neon transition-colors duration-200">Freelance Web Architecture & Production</h3>
+            <p class="text-sm text-text-secondary leading-relaxed mb-4">
+              Engineered and launched high-performance web solutions for diverse clients, including an educational institute platform, a custom showcase portfolio for professional video editors, and the official production hub for Aditya Invents to directly unify digital media channels with robust web architecture.
+            </p>
+          </div>
+        </div>
+        <div class="px-6 pb-6 pt-2">
+          <!-- Tech pills -->
+          <div class="flex flex-wrap gap-1.5 mb-6">
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">Next.js</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">React</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">Tailwind CSS</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">Vercel</span>
+          </div>
+          <!-- Project links -->
+          <div class="flex gap-4">
+            <a href="https://adtiyainvents.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-brand-neon hover:underline gap-1.5">
+              Live Production Hub
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project Card 3 (3-in-1 Autonomous Robotics Vehicle) -->
+      <div class="project-item bg-bg-card border border-border-main/70 rounded-2xl overflow-hidden group hover:border-brand-neon/50 hover:shadow-[0_0_30px_rgba(0,242,254,0.1)] transition-all duration-300 flex flex-col justify-between" data-category="ai">
+        <div>
+          <!-- Project Image -->
+          <div class="relative aspect-video overflow-hidden border-b border-border-main/50">
+            <img src="assets/project_ai_network.png" alt="AI Robotics Node Map" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-bg-card via-transparent to-transparent opacity-60"></div>
+          </div>
+          <!-- Project Info -->
+          <div class="p-6">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10px] font-semibold font-mono text-brand-neon bg-brand-neon/10 border border-brand-neon/20 px-2 py-0.5 rounded uppercase">Robotics & Firmware</span>
+              <span class="text-xs font-mono text-text-secondary">Completed</span>
+            </div>
+            <h3 class="text-xl font-bold text-text-primary mb-2 group-hover:text-brand-neon transition-colors duration-200">3-in-1 Autonomous Robotics Vehicle</h3>
+            <p class="text-sm text-text-secondary leading-relaxed mb-4">
+              An Arduino-based multi-mode vehicular project combining Bluetooth control, obstacle avoidance arrays, and voice-activation APIs.
+            </p>
+          </div>
+        </div>
+        <div class="px-6 pb-6 pt-2">
+          <!-- Tech pills -->
+          <div class="flex flex-wrap gap-1.5 mb-6">
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">Arduino</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">Hardware</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">C++</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">Sensors</span>
+          </div>
+          <!-- Project links -->
+          <div class="flex gap-4">
+            <a href="https://github.com/Ravi-paribrajak" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-brand-neon hover:underline gap-1.5">
+              Source Code
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project Card 4 (Technical Brand Architecture) -->
+      <div class="project-item bg-bg-card border border-border-main/70 rounded-2xl overflow-hidden group hover:border-brand-neon/50 hover:shadow-[0_0_30px_rgba(0,242,254,0.1)] transition-all duration-300 flex flex-col justify-between" data-category="ai">
+        <div>
+          <!-- Project Image -->
+          <div class="relative aspect-video overflow-hidden border-b border-border-main/50">
+            <img src="assets/project_digital_production.png" alt="Digital Media Production Interface" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-bg-card via-transparent to-transparent opacity-60"></div>
+          </div>
+          <!-- Project Info -->
+          <div class="p-6">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10px] font-semibold font-mono text-brand-neon bg-brand-neon/10 border border-brand-neon/20 px-2 py-0.5 rounded uppercase">Digital Production</span>
+              <span class="text-xs font-mono text-text-secondary">Active</span>
+            </div>
+            <h3 class="text-xl font-bold text-text-primary mb-2 group-hover:text-brand-neon transition-colors duration-200">Technical Brand Architecture</h3>
+            <p class="text-sm text-text-secondary leading-relaxed mb-4">
+              Lead technical execution, programming, custom scriptwriting, and advanced video post-production for high-growth robotics channels; successfully delivered international brand sponsorships and high-traction digital assets.
+            </p>
+          </div>
+        </div>
+        <div class="px-6 pb-6 pt-2">
+          <!-- Tech pills -->
+          <div class="flex flex-wrap gap-1.5 mb-6">
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">Content Strategy</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">DaVinci Resolve</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">Auphonic</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 bg-bg-dark rounded border border-border-main text-slate-400">Mastering</span>
+          </div>
+          <!-- Project links -->
+          <div class="flex gap-4">
+            <a href="https://www.instagram.com/aditya.invents/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-brand-neon hover:underline gap-1.5">
+              Instagram Channel
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="max-w-7xl mx-auto px-6 py-24 border-t border-border-main/40 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <!-- Info Column (Left - 5 cols) -->
+      <div class="lg:col-span-5 text-left flex flex-col justify-between">
+        <div>
+          <h2 class="text-xs font-mono tracking-widest text-brand-neon uppercase mb-3">// Get in touch</h2>
+          <p class="text-3xl lg:text-4xl font-extrabold text-text-primary tracking-tight mb-6">Let's build something epic</p>
+          <p class="text-text-secondary text-sm leading-relaxed mb-8 max-w-sm">
+            Whether you want to discuss a new high-performance system design, modular UI/UX setups, or just chat, drop me a message.
+          </p>
+
+          <!-- Contact Options -->
+          <div class="space-y-4">
+            <!-- Email -->
+            <div class="flex items-center gap-4 group">
+              <div class="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-brand-neon group-hover:border-brand-neon/60 transition-colors duration-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-[10px] font-mono text-text-secondary uppercase">Email</p>
+                <a href="mailto:paribrajakravishankarkumar@gmail.com" class="text-sm font-semibold text-text-primary hover:text-brand-neon transition-colors duration-200 select-all">paribrajakravishankarkumar@gmail.com</a>
+              </div>
+            </div>
+            <!-- Location -->
+            <div class="flex items-center gap-4 group">
+              <div class="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-brand-neon group-hover:border-brand-neon/60 transition-colors duration-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-[10px] font-mono text-text-secondary uppercase">Location</p>
+                <span class="text-sm font-semibold text-text-primary">India</span>
+              </div>
+            </div>
+            <!-- Website Link in options list -->
+            <div class="flex items-center gap-4 group">
+              <div class="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-brand-neon group-hover:border-brand-neon/60 transition-colors duration-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-[10px] font-mono text-text-secondary uppercase">Website</p>
+                <a href="https://adtiyainvents.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-text-primary hover:text-brand-neon transition-colors duration-200">adtiyainvents.vercel.app</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="flex gap-4 mt-8 lg:mt-0">
+          <a href="https://github.com/Ravi-paribrajak" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" class="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-secondary hover:text-brand-neon hover:border-brand-neon/40 transition-all duration-200">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/aditya.invents/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile" class="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-secondary hover:text-brand-neon hover:border-brand-neon/40 transition-all duration-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="https://www.youtube.com/@Adityainvents" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel" class="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-secondary hover:text-brand-neon hover:border-brand-neon/40 transition-all duration-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.58 29 29 0 0 0-.46-5.58z" />
+              <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" />
+            </svg>
+          </a>
+          <a href="https://adtiyainvents.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Website" class="w-10 h-10 rounded-xl bg-bg-card border border-border-main flex items-center justify-center text-text-secondary hover:text-brand-neon hover:border-brand-neon/40 transition-all duration-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Form Column (Right - 7 cols) -->
+      <div class="lg:col-span-7">
+        <form action="https://api.web3forms.com/submit" method="POST" class="bg-bg-card border border-border-main/70 rounded-2xl p-6 sm:p-8 space-y-6 hover:border-brand-neon/20 transition-all duration-300">
+          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="flex flex-col space-y-2">
+              <label for="name" class="text-xs font-semibold font-mono text-text-secondary">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="John Doe" required class="w-full px-4 py-3 bg-bg-dark border border-border-main/60 rounded-xl text-text-primary text-sm placeholder:text-text-secondary/50 focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon/50 transition-colors duration-200">
+            </div>
+            <div class="flex flex-col space-y-2">
+              <label for="email" class="text-xs font-semibold font-mono text-text-secondary">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="john@example.com" required class="w-full px-4 py-3 bg-bg-dark border border-border-main/60 rounded-xl text-text-primary text-sm placeholder:text-text-secondary/50 focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon/50 transition-colors duration-200">
+            </div>
+          </div>
+          <div class="flex flex-col space-y-2">
+            <label for="subject" class="text-xs font-semibold font-mono text-text-secondary">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="Project Inquiry" required class="w-full px-4 py-3 bg-bg-dark border border-border-main/60 rounded-xl text-text-primary text-sm placeholder:text-text-secondary/50 focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon/50 transition-colors duration-200">
+          </div>
+          <div class="flex flex-col space-y-2">
+            <label for="message" class="text-xs font-semibold font-mono text-text-secondary">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Let's build something awesome..." required class="w-full px-4 py-3 bg-bg-dark border border-border-main/60 rounded-xl text-text-primary text-sm placeholder:text-text-secondary/50 focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon/50 transition-colors duration-200 resize-none"></textarea>
+          </div>
+          <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-brand-neon to-brand-electric text-slate-950 text-sm font-bold uppercase tracking-wider hover:opacity-90 active:scale-[0.99] transition-all duration-200 cursor-pointer shadow-lg shadow-brand-neon/10">
+            Send Secure Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="max-w-7xl mx-auto px-6 py-12 border-t border-border-main/40 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+    <div class="flex flex-col sm:flex-row items-center gap-6 text-xs font-mono text-text-secondary">
+      <span>&copy; 2026 Aditya Paribrajak. All rights reserved.</span>
+      <div class="flex flex-wrap items-center gap-4">
+        <a href="mailto:paribrajakravishankarkumar@gmail.com" class="hover:text-brand-neon transition-colors duration-200">Email</a>
+        <span class="text-border-main/60">•</span>
+        <a href="https://github.com/Ravi-paribrajak" target="_blank" rel="noopener noreferrer" class="hover:text-brand-neon transition-colors duration-200">GitHub</a>
+        <span class="text-border-main/60">•</span>
+        <a href="https://www.instagram.com/aditya.invents/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-neon transition-colors duration-200">Instagram</a>
+        <span class="text-border-main/60">•</span>
+        <a href="https://www.youtube.com/@Adityainvents" target="_blank" rel="noopener noreferrer" class="hover:text-brand-neon transition-colors duration-200">YouTube</a>
+        <span class="text-border-main/60">•</span>
+        <a href="https://adtiyainvents.vercel.app/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-neon transition-colors duration-200">Website</a>
+      </div>
+    </div>
+    
+    <a href="#hero" class="text-xs font-semibold font-mono text-brand-neon hover:underline flex items-center gap-1.5">
+      Back to Top
+      <svg class="w-3.5 h-3.5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </a>
+  </footer>
+
+  <!-- Floating Scroll To Top Button -->
+  <button id="scroll-top-btn" class="fixed bottom-6 right-6 z-50 p-3 rounded-full border border-brand-neon/60 bg-bg-dark/80 backdrop-blur-sm text-brand-neon opacity-0 scale-90 translate-y-4 pointer-events-none transition-all duration-300 shadow-lg shadow-brand-neon/10 cursor-pointer hover:bg-brand-neon/10 hover:scale-105 active:scale-95" aria-label="Scroll to top of page">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </button>
+
+  <!-- Javascript Logic -->
+  <script>
+    // Responsive Mobile Menu Interactivity
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const closeIcon = document.getElementById('close-icon');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    function toggleMobileMenu() {
+      const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+      mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+      
+      if (!isExpanded) {
+        mobileMenu.classList.remove('hidden');
+        hamburgerIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+      } else {
+        mobileMenu.classList.add('hidden');
+        hamburgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      }
+    }
+
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+    // Close menu when link is clicked
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (!mobileMenu.classList.contains('hidden')) {
+          toggleMobileMenu();
+        }
+      });
+    });
+
+    // Color Scheme Toggler (respects system preference + persists state)
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      if (isDark) {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+        localStorage.setItem('theme', 'light');
+        document.querySelector('meta[name="color-scheme"]').content = 'light';
+      } else {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        document.querySelector('meta[name="color-scheme"]').content = 'dark';
+      }
+    }
+
+    if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+    if (themeToggleMobileBtn) themeToggleMobileBtn.addEventListener('click', toggleTheme);
+
+    // Listen for OS system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        if (e.matches) {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light');
+          document.querySelector('meta[name="color-scheme"]').content = 'dark';
+        } else {
+          document.documentElement.classList.add('light');
+          document.documentElement.classList.remove('dark');
+          document.querySelector('meta[name="color-scheme"]').content = 'light';
+        }
+      }
+    });
+
+    // Navigation scroll effect (adds background blur and border on scroll)
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        navbar.classList.add('bg-bg-dark/90', 'shadow-md', 'py-1');
+        navbar.classList.remove('bg-bg-dark/70');
+      } else {
+        navbar.classList.remove('bg-bg-dark/90', 'shadow-md', 'py-1');
+        navbar.classList.add('bg-bg-dark/70');
+      }
+    });
+
+    // Interactive Project Categorized Filtering
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const projectItems = document.querySelectorAll('.project-item');
+
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        // Remove active class from all tabs
+        filterTabs.forEach(t => {
+          t.classList.remove('active', 'border-brand-neon/60', 'text-brand-neon');
+          t.classList.add('text-text-secondary');
+        });
+
+        // Add active state to clicked tab
+        e.target.classList.add('active', 'border-brand-neon/60', 'text-brand-neon');
+        e.target.classList.remove('text-text-secondary');
+
+        const filter = e.target.getAttribute('data-filter');
+
+        projectItems.forEach(item => {
+          const category = item.getAttribute('data-category');
+          
+          if (filter === 'all' || category === filter) {
+            // Show with animation
+            item.style.display = 'flex';
+            setTimeout(() => {
+              item.style.opacity = '1';
+              item.style.transform = 'scale(1)';
+            }, 50);
+          } else {
+            // Hide with animation
+            item.style.opacity = '0';
+            item.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+              item.style.display = 'none';
+            }, 300); // matches transition time
+          }
+        });
+      });
+    });
+
+    // Scroll to Top Button Visibility
+    const scrollTopBtn = document.getElementById('scroll-top-btn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        scrollTopBtn.classList.remove('opacity-0', 'scale-90', 'translate-y-4', 'pointer-events-none');
+        scrollTopBtn.classList.add('opacity-100', 'scale-100', 'translate-y-0', 'pointer-events-auto');
+      } else {
+        scrollTopBtn.classList.remove('opacity-100', 'scale-100', 'translate-y-0', 'pointer-events-auto');
+        scrollTopBtn.classList.add('opacity-0', 'scale-90', 'translate-y-4', 'pointer-events-none');
+      }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+</body>
+</html>
